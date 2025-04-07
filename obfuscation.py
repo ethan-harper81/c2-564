@@ -37,8 +37,6 @@ def deobfuscate_payload(obs, xor_key):
 
   i = 1 
   for key in data:
-      print(key)
-      print(data[key])
       og = xor_b64_decode(data[key], xor_key)
       payload[f'data_{i}'] = og
       i+=1

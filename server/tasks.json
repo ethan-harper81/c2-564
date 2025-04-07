@@ -1,6 +1,6 @@
 {
   "implant2": {
-    "task": "destroy",
+    "task": "get_data",
     "parameters": {
       "path": "data.json"
     }

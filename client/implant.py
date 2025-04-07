@@ -32,7 +32,7 @@ while alive:
         res = requests.post(f"{SERVER}/get_task", json={"uuid": UUID})
         task = res.json()
         num_errors = 0
-        if task["task"] == "get_file":
+        if task["task"] == "get_data":
             path = task["parameters"]["path"]
             try:
                 with open(path, "r") as f:
